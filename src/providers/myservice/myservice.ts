@@ -21,5 +21,11 @@ export class MyserviceProvider {
   getArticles() {
     return this.http.get('http://127.0.0.1:3000/api/v1/detalles');
   }
-  // this.HttpHeaders().set("Auto", "this is my information");
+  // this.HttpHeaders().set("Auto", "this is my information");//
+  addArticles(article:any){
+    return this.http.post('http://172.30.6.200:3000/api/v1/detalles', article)
+  }
+  deleteArticles(id:any){
+    return this.http.delete('http://172.30.6.200:3000/api/v1/detalles/'+id)
+  }
 }

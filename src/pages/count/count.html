@@ -49,13 +49,14 @@
 
   <ion-list *ngIf="listD.error == false">
     <ion-item  *ngFor="let result of listD.data">
-         {{result.title}} <br>
+         {{result.title}} <br>         
     </ion-item>
   </ion-list>
 
   <ion-list *ngIf="listC.error == false">
     <ion-item *ngFor="let result of listC.data">
-         {{result.codigoprd}} <br>
+         {{result.codigoprd}} 
+         <button ion-button item-end (click)="delArticle(result.id)">Eliminar</button>
     </ion-item>
   </ion-list>
 
@@ -64,26 +65,36 @@
   <ion-list>
 
   <ion-item>
-    <ion-label fixed>Name</ion-label>
-    <ion-input type="text" value="" [(ngModel)]="formu.name"></ion-input>
+    <ion-label fixed>Factura</ion-label>
+    <ion-input type="number" [(ngModel)]="formu.nofra"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label fixed>Producto</ion-label>
+    <ion-input type="text" value="" [(ngModel)]="formu.codigoprd"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label fixed>Email</ion-label>
-    <ion-input type="email" [(ngModel)]="formu.email"></ion-input>
+    <ion-label fixed>cantidad</ion-label>
+    <ion-input type="number" [(ngModel)]="formu.cantidad"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label fixed>Login</ion-label>
-    <ion-input type="login" [(ngModel)]="formu.login"></ion-input>
+    <ion-label fixed>impuesto</ion-label>
+    <ion-input type="number" [(ngModel)]="formu.impuesto"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label fixed>precio</ion-label>
+    <ion-input type="number" [(ngModel)]="formu.precio"></ion-input>
   </ion-item>
 
   <button ion-button block (click)="viewData(formu)">Guardar</button>
 
+  <button ion-button block (click)="deleteData(formu)">Elimina</button>
+
   </ion-list>
-
   <!-- Portafolio para cumplir todos los objetivos estrategicos -->
-
 
 </ion-content>
 

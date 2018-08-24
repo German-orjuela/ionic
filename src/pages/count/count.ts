@@ -21,7 +21,7 @@ export class CountPage {
   options: Array<{option: string, nota:string, img: string}>;
   listD:object = {error: true, data: []};
   listC:object = {error: true, data: []};
-  formu:object = {name: '', email: '', login: ''};
+  formu:object = {nofra: '', codigoprd: '', cantidad: 0, impuesto: 0, precio: 0 };
   
   constructor(
     public navCtrl: NavController, 
@@ -30,23 +30,8 @@ export class CountPage {
     public platform: Platform,
     public alertCtrl: AlertController,
     public rest: MyserviceProvider) { 
-
-      // for (let index = 0; index < 5; index++) {
-      //   this.personas.push({
-      //     nombre: 'jerry' + 0,
-      //     apellido: 'Lagos' + 0,
-      //     cedula: "1000"+index+"58"
-      //   })
-        
-      // }
-
-
-
+     
     }
-
-    // funDelete(i){
-    //   this.personas.splice(i, 1);
-    // }
 
   // Proceso para que se inicie de forma automatica
     list :Array<any> = [];
@@ -88,8 +73,49 @@ export class CountPage {
   }
 
   viewData(data:any){
-    console.log(data);
+      this.rest.addArticles(data).subscribe((response:any)=>{
+      console.log(response.message);
+        this.getArticle();
+        const alert = this.alertCtrl.create({
+          title: 'Post Alert',
+          subTitle: response.message,
+          buttons: [
+            {
+              text: 'ok',
+              handler: data => {
+                console.log("click sobre ok")
+              }
+            }
+          ]
+        })
+        alert.present();
+      },
+      (error:any)  => {
+        this.getArticle() ;
+    })
+
   }
+
+  delArticle(id:any){
+    console.log(id) ;
+    this.rest.deleteArticles(id).subscribe((response:any)=>{
+    console.log(response);
+    this.getArticle() ;
+  
+  })
+}
+
+ // nuevo llamado con POST 
+ // addArticles(){
+ //   this.rest.addArticles().subscribe((res:any) => {
+ //     if (res) {
+ //       this.listC = {error: false, data: res.data};
+ //       console.log(typeof this.listC, this.listC)
+ //     }
+ //   })
+// }
+
+
   // Alertas para ionic
   showAlert(){
     const alert = this.alertCtrl.create({
